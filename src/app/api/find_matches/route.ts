@@ -36,8 +36,11 @@ export async function POST(req: NextRequest) {
       coords,
       similarity,
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error(err);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    if (err instanceof Error) {
+      return NextResponse.json({ error: err.message }, { status: 500 });
+    }
+    return NextResponse.json({ error: String(err) }, { status: 500 });
   }
 }
