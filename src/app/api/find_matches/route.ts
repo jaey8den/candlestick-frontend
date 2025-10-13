@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
       }
     );
 
-    console.log("Response received from backend.");
+    console.log("Response received from backend. Status:", response.status);
 
     const blob = await response.blob();
     const arrayBuffer = await blob.arrayBuffer();
