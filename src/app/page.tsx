@@ -1,7 +1,5 @@
 "use client";
 
-import Image from "next/image";
-
 import Screenshot from "./components/Screenshot.tsx";
 
 export default function Home() {

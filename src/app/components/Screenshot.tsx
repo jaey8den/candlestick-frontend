@@ -4,8 +4,15 @@ import { useState } from "react";
 import Image from "next/image";
 
 export default function Screenshot() {
+  type MatchResult = {
+    image: string;
+    patternName: string;
+    coords: string;
+    similarity: string;
+  };
+
   const [file, setFile] = useState<File | null>(null);
-  const [result, setResult] = useState<any>(null);
+  const [result, setResult] = useState<MatchResult | null>(null);
   const [loading, setLoading] = useState(false);
 
   async function handleUpload(e: React.FormEvent) {
