@@ -11,8 +11,12 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
     }
 
+    console.log("File uploaded.");
+
     const forwardForm = new FormData();
     forwardForm.append("file", file);
+
+    console.log("Forwarding request to backend...");
 
     const response = await fetch(
       "https://candlestick-backend-s54n.onrender.com/match-pattern/",
@@ -21,6 +25,8 @@ export async function POST(req: NextRequest) {
         body: forwardForm,
       }
     );
+
+    console.log("Response received from backend.");
 
     const blob = await response.blob();
     const arrayBuffer = await blob.arrayBuffer();
