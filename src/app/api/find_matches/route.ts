@@ -14,10 +14,13 @@ export async function POST(req: NextRequest) {
     const forwardForm = new FormData();
     forwardForm.append("file", file);
 
-    const response = await fetch("http://localhost:8000/match-pattern/", {
-      method: "POST",
-      body: forwardForm,
-    });
+    const response = await fetch(
+      "https://candlestick-backend-s54n.onrender.com/match-pattern/",
+      {
+        method: "POST",
+        body: forwardForm,
+      }
+    );
 
     const blob = await response.blob();
     const arrayBuffer = await blob.arrayBuffer();
@@ -33,10 +36,6 @@ export async function POST(req: NextRequest) {
       coords,
       similarity,
     });
-
-    // const result = await response.json();
-
-    // return NextResponse.json(result);
   } catch (err: any) {
     console.error(err);
     return NextResponse.json({ error: err.message }, { status: 500 });
