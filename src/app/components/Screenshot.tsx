@@ -6,9 +6,10 @@ import Image from "next/image";
 export default function Screenshot() {
   type MatchResult = {
     image: string;
-    patternName: string;
-    coords: string;
-    similarity: string;
+    patternName: string | null;
+    coords: string | null;
+    similarity: string | null;
+    error: string | null;
   };
 
   const [file, setFile] = useState<File | null>(null);
@@ -32,6 +33,12 @@ export default function Screenshot() {
     setLoading(false);
   }
 
+  async function checkHealth() {
+    const res = await fetch("/api/health");
+    const data = await res.json();
+    alert(`Backend status: ${data.status}`);
+  }
+
   return (
     <section id="screenshot" className="max-w-5xl mx-auto pt-8">
       <h2 className="text-3xl font-bold text-center">Upload Screenshot</h2>
@@ -51,20 +58,32 @@ export default function Screenshot() {
           {loading ? "Processing..." : "Find Matches"}
         </button>
       </form>
-      {result && (
-        <div className="mt-4">
-          <h2>{result.patternName}</h2>
-          <p>Coords: {result.coords}</p>
-          <p>Score: {result.similarity}</p>
-          <Image
-            className="mt-4"
-            src={result.image}
-            alt="Matched Pattern"
-            width={500}
-            height={500}
-          />
-        </div>
-      )}
+      {result &&
+        (!result.error ? (
+          <div className="mt-4">
+            <h2>{result.patternName}</h2>
+            <p>Coords: {result.coords}</p>
+            <p>Score: {result.similarity}</p>
+            <Image
+              className="mt-4"
+              src={result.image}
+              alt="Matched Pattern"
+              width={500}
+              height={500}
+            />
+          </div>
+        ) : (
+          <div className="mt-4">
+            <h2>Error</h2>
+            <p>{result.error}</p>
+          </div>
+        ))}
+      <button
+        onClick={checkHealth}
+        className="m-4 p-2 bg-gray-500 text-white rounded"
+      >
+        Health Check
+      </button>
     </section>
   );
 }
