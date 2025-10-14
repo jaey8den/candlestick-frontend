@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
     console.log("Forwarding request to backend...");
 
     const response = await fetch(
-      "https://candlestick-backend-s54n.onrender.com/match-pattern/",
+      "https://jaey8den-candlestick-matcher-backend.hf.space/match-pattern/",
       {
         method: "POST",
         body: forwardForm,
