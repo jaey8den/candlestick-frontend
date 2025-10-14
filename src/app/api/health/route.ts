@@ -6,7 +6,7 @@ export async function GET() {
   try {
     console.log("Fetching health check...");
     const res = await fetch(
-      "https://jaey8den-candlestick-matcher-backend.hf.space//healthcheck/"
+      "https://jaey8den-candlestick-matcher-backend.hf.space/healthcheck/"
     );
     console.log("Health check responded");
     return NextResponse.json({ status: res.status });
