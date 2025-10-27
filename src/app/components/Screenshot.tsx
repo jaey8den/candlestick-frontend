@@ -7,7 +7,6 @@ export default function Screenshot() {
   type MatchResult = {
     image: string;
     patternName: string | null;
-    coords: string | null;
     similarity: string | null;
     error: string | null;
   };
@@ -49,11 +48,13 @@ export default function Screenshot() {
           disabled={loading}
           onChange={(e) => setFile(e.target.files?.[0] || null)}
           className="m-4 p-2 border border-gray-300 rounded"
+          style={{ cursor: "pointer" }}
         />
         <button
           type="submit"
           disabled={!file || loading}
           className="m-4 p-2 bg-blue-500 text-white rounded"
+          style={{ cursor: "pointer" }}
         >
           {loading ? "Processing..." : "Find Matches"}
         </button>
@@ -62,7 +63,6 @@ export default function Screenshot() {
         (!result.error ? (
           <div className="mt-4">
             <h2>{result.patternName}</h2>
-            <p>Coords: {result.coords}</p>
             <p>Score: {result.similarity}</p>
             <Image
               className="mt-4"
@@ -81,8 +81,9 @@ export default function Screenshot() {
       <button
         onClick={checkHealth}
         className="m-4 p-2 bg-gray-500 text-white rounded"
+        style={{ cursor: "pointer" }}
       >
-        Health Check
+        Server Status
       </button>
     </section>
   );
