@@ -38,6 +38,7 @@ export default function Screenshot() {
       await new Promise((resolve) => setTimeout(resolve, 2000));
       const res2 = await fetch("/api/polling?task_id=" + task_id);
       const data = await res2.json();
+      console.log(data.status);
       if (data.status == "completed") {
         setResult(data);
         break;
