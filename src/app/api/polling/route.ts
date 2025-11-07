@@ -34,7 +34,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({
         status: data.status,
         image: `data:image/jpg;base64,${image}`,
-        patternName: pattern_dict[pattern as keyof typeof pattern_dict],
+        name: pattern_dict[pattern as keyof typeof pattern_dict],
         similarity: score,
       });
     }

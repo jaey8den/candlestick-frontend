@@ -77,7 +77,7 @@ export default function Screenshot() {
       {result &&
         (!result.error ? (
           <div className="mt-4">
-            <h2 className="text-xl">{result.name}</h2>
+            <h2 className="text-2xl font-bold mb-2">{result.name}</h2>
             <p>Score: {result.similarity}</p>
             <Image
               className="mt-4"
